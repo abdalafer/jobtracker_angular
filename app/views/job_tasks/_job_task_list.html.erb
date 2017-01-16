@@ -1,0 +1,44 @@
+<ul class="nav nav-tabs">
+  <li class="active"><a id='started_tab' data-toggle="tab" href="#started">Started <span class="badge"><%= item_count(@tasks['started']) %></span></a></li>
+  <li><a id='created_tab' data-toggle="tab" href="#created">Pending <span class="badge"><%= item_count(@tasks['created']) %></span></a></li>
+  <li><a id='finished_tab' data-toggle="tab" href="#finished">Finished <span class="badge"><%= item_count(@tasks['finished']) %></span></a></li>
+</ul>
+
+<div class="tab-content tasks_tab_content">
+    <div id="started" class="tab-pane fade in active">
+    <h3>Started</h3>
+
+    <% @tasks['started'].each do |task| %>
+        <div class="list-group-item">
+          <%= delete_job_task_button @job.uuid, task.uuid %>
+          <%= button_to('Finish', "/job/#{@job.uuid}/task/#{task.uuid}/finish", class: 'btn btn-success finish_item_button', remote: true, method: :post) %>
+          <%= button_to(task.title, "/task/#{task.uuid}", class: 'btn btn-success task_button', remote: true, method: :get) %>
+        </div>
+    <% end if @tasks['started'].present? %>
+
+    </div>
+    <div id="created" class="tab-pane fade in">
+    <h3>Pending</h3>
+      <% @tasks['created'].each do |task| %>
+          <div class="list-group-item">
+
+            <%= delete_job_task_button @job.uuid, task.uuid %>
+            <%= button_to('Start', "/job/#{@job.uuid}/task/#{task.uuid}/start", class: 'btn btn-success start_item_button', remote: true, method: :post) %>
+
+            <%= button_to(task.title, "/task/#{task.uuid}", class: 'btn btn-success task_button', remote: true, method: :get) %>
+
+          </div>
+      <% end if @tasks['created'].present? %>
+    </div>
+    <div id="finished" class="tab-pane fade in">
+    <h3>Finished</h3>
+      <% @tasks['finished'].each do |task| %>
+          <div class="list-group-item">
+            <%= button_to(task.title, "/task/#{task.uuid}", class: 'btn btn-success task_button', remote: true, method: :get) %>
+          </div>
+      <% end if @tasks['finished'].present? %>
+</div>
+</div>
+
+<div id="job_task_details"></div>
+

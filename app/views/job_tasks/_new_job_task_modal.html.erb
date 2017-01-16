@@ -1,0 +1,30 @@
+<!-- Button trigger modal -->
+<!--todo when new task selected, clear the form -->
+<button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#newJobTaskModal">
+  New Task
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="newJobTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Job Task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= bootstrap_form_for(@job_task = JobTask.new, url:'/add_job_task', remote:true) do |f| %>
+            <%= f.text_field :title %>
+            <%= f.text_area :notes %>
+            <%= f.hidden_field :job_uuid, :value => @job.uuid  %>
+            <%= f.submit "Submit" %>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

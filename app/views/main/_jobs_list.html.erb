@@ -1,0 +1,5 @@
+<div class="list-group">
+  <% @jobs.each do |job| %>
+      <a href="/job/<%= job.uuid %>/tasks" class="list-group-item"><%= job.title %></a>
+  <% end %>
+</div>

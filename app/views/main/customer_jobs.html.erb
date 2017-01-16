@@ -1,0 +1,12 @@
+<h3 class="text-center"><%= @customer.full_name %></h3>
+<div id="customer_detail_section">
+  <%= render partial: 'customer_detail_modal' %>
+</div>
+<br/>
+<%= render partial: 'new_customer_job_modal' %>
+
+<hr/>
+<h4>Jobs List</h4>
+<div id="jobs_list_section">
+  <%= render partial: 'jobs_list' %>
+</div>

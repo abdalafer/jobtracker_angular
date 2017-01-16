@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JobTracker</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="hidden navbar-header">
+      <%= link_to 'JobTracker', '/customers', class: 'navbar-brand' %>
+    </div>
+<br/>
+    <div class="pull-left">
+      <%= breadcrumbs.render %>
+    </div>
+    <div class="pull-right">
+      <% if signed_in? %>
+          <!-- Signed in as: <%= current_user.email %> -->
+          <%= button_to 'Sign out', sign_out_path, class: 'btn btn-primary', method: :delete %>
+      <% else %>
+          <%= link_to 'Sign in', sign_in_path, class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>">
+        <%= value %>
+      </div>
+  <% end %>
+
+  <%= yield %>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+// Place all the styles related to the JobTasks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.task_delete_button
+{
+  float:left;
+  padding-right: 5px;
+}
+
+.start_item_button
+{
+  float:left;
+}
+
+.finish_item_button
+{
+  float:left;
+}
+
+.task_button
+{
+  margin-left:5px;
+  width: 55%
+}
+
+@media (min-width: 580px) {
+  .task_button
+  {
+    width: 80%
+  }
+}

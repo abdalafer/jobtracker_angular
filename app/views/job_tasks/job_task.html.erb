@@ -1,0 +1,5 @@
+<%= bootstrap_form_for(@job_task, url:'/update_job_task', remote:true) do |f| %>
+    <%= f.text_field :title %>
+    <%= f.hidden_field :job_uuid, :value => @job.uuid  %>
+    <%= f.submit "Update" %>
+<% end %>
