@@ -32,5 +32,8 @@ TODO:
 Notes:
 
 Test were not written initially to focus on the workings of angular and rails together.
+The app was originally a standard rails project with ajax partials, then angular was integrated on top of it.
+Angular specific controllers were created to separate the two so that the standard rails project can still be used by going to the path "/customers".
+Likely the standard rails controllers and views will be stripped out to make this an angular/rails only app.
 
 <tt>rake doc:app</tt>.
