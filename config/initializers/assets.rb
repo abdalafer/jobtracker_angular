@@ -8,4 +8,15 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-# Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w(
+  jquery.self.js
+  jquery_ujs.self.js
+  angular.self.js
+  angular-resource.self.js
+  angular-route.self.js
+  angular-rails-templates.self.js
+  angular_controllers.self.js
+  angular_main.self.js
+  application.self.js
+  templates/index.self.js
+)
