@@ -1,4 +1,0 @@
-database:
-  override:
-    - cd /home/ubuntu/jobtracker_angular/
-    - bundle exec rake db:create dbschema:load --trace
