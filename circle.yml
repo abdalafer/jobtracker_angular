@@ -1,5 +1,4 @@
 database:
   override:
-    - mv config/database.yml.ci config/database.yml
     - cd /home/ubuntu/jobtracker_angular/
-    - bundle exec rake db:create db:schema:load --trace
+    - bundle exec rake db:create dbschema:load --trace
