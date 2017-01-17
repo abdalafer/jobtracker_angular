@@ -16,12 +16,21 @@ App Specs:
 
 * AngularJS v1.6.1
 
-TODO
+About the App functionality:
+
+This is a simple app to show angular working with rails.
+The purpose is for an individual to be able to track their jobs and clients.
+A user can view a list of customers and/or add them. They can then add jobs for those customers.
+Once jobs are added the user can add individual tasks within each job. Those tasks have a state (Pending, Started, Finished) and can take notes.
+
+TODO:
+
 * Rspec frontend (capybara)
 
 * Rspec backend REST api calls and unit tests where needed.
 
-Notes
+Notes:
+
 Test were not written initially to focus on the workings of angular and rails together.
 
 <tt>rake doc:app</tt>.
