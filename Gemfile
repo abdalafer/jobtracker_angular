@@ -52,7 +52,16 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap_form'
 
 gem 'clearance', '~> 1.11'
-
 gem 'breadcrumbs'
+
+#angular
+#loads all angular js files into assets
+gem 'angularjs-rails'
+
+#allows to use usual rails view's as templates, can use extensions .erb, etc...
+gem 'angular-rails-templates'
+
+#adds support for CSRF for non GET calls
+gem 'angular_rails_csrf'
 
 
