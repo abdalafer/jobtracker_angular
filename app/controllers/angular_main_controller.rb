@@ -11,9 +11,9 @@ class AngularMainController < ApplicationController
   end
 
   def customer_jobs
+    #todo error handling
     customer = current_user.customers.where(uuid: params[:uuid]).first
     jobs = customer.try(:jobs)
-
 
     api_response ({customer: customer, jobs: jobs}).to_json
   end
