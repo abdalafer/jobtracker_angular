@@ -4,6 +4,8 @@
 This application uses Rails for backend REST calls with Angular on the frontend.
 Utilising the Clearance gem for authentication and authorization.
 
+Continuous Integration done via Circle CI, which runs Rspec Tests then deploys to Heroku when tests pass.
+
 App Specs:
 
 * Ruby v2.2.2
@@ -25,15 +27,12 @@ Once jobs are added the user can add individual tasks within each job. Those tas
 
 TODO:
 
-* Rspec frontend (capybara)
-
-* Rspec backend REST api calls and unit tests where needed.
+* frontend tests(capybara)
 
 Notes:
 
-Test were not written initially to focus on the workings of angular and rails together.
 The app was originally a standard rails project with ajax partials, then angular was integrated on top of it.
 Angular specific controllers were created to separate the two so that the standard rails project can still be used by going to the path "/customers".
-Likely the standard rails controllers and views will be stripped out to make this an angular/rails only app.
+Likely I will be stripped out the standard rails controllers and views to make this an angular/rails only app.
 
 <tt>rake doc:app</tt>.
