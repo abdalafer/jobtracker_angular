@@ -21,13 +21,19 @@ jobtracker.config(['$routeProvider',
 
 //back button
 //todo, hide when at Home "/"
-jobtracker.directive("angularBack", [function($window){
+jobtracker.directive("angularBack", ['$window', function($window){
     return {
         template: "<button class='btn btn-primary'>Back</button>",
+        controller: 'HomeController',
+        controllerAs: 'vm',
+        bindToController:true,
         link: function(scope, elem, attrs){
             elem.bind('click', function(){
                 //todo, back button should not refresh page. instead load previous route
-                javascript:history.go(-1)
+                if (scope.vm.canGoBack){
+                    javascript:history.go(-1)
+                }
+
             })
         }
     };
@@ -36,6 +42,18 @@ jobtracker.directive("angularBack", [function($window){
 //Controllers
 jobtracker.controller('HomeController', ['$route', '$scope', '$http', '$location', '$routeParams',
     function($route, $scope, $http, $location, $routeParams){
+        //vm accessible via scope using controllerAs, bindToController:true
+        var vm = this;
+
+        $scope.$on('$locationChangeStart',function(evt, currentUrl, previousUrl) {
+            //if current url is root then dont set canGoBack = false so back button directive does not go back.
+            if (currentUrl.endsWith('#!/')){
+                vm.canGoBack = false;
+            } else {
+                vm.canGoBack = true;
+            }
+        });
+
         $scope.getCustomers = function(){
             $http.get('/a_customers_data')
                 .then(function (result){
