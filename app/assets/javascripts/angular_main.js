@@ -19,26 +19,6 @@ jobtracker.config(['$routeProvider',
             })
 }]);
 
-//back button
-//todo, hide when at Home "/"
-jobtracker.directive("angularBack", ['$window', function($window){
-    return {
-        template: "<button class='btn btn-primary'>Back</button>",
-        controller: 'HomeController',
-        controllerAs: 'vm',
-        bindToController:true,
-        link: function(scope, elem, attrs){
-            elem.bind('click', function(){
-                //todo, back button should not refresh page. instead load previous route
-                if (scope.vm.canGoBack){
-                    javascript:history.go(-1)
-                }
-
-            })
-        }
-    };
-}]);
-
 //Controllers
 jobtracker.controller('HomeController', ['$route', '$scope', '$http', '$location', '$routeParams',
     function($route, $scope, $http, $location, $routeParams){
@@ -76,9 +56,9 @@ jobtracker.controller('HomeController', ['$route', '$scope', '$http', '$location
             $http.get('/a_job/'+ uuid+'/tasks')
                 .then(function (result){
                     $scope.job = result.data.job;
-                    $scope.pending_tasks = result.data.created;
-                    $scope.started_tasks = result.data.started;
-                    $scope.finished_tasks = result.data.finished;
+                    $scope.pending_tasks = result.data.tasks.created;
+                    $scope.started_tasks = result.data.tasks.started;
+                    $scope.finished_tasks = result.data.tasks.finished;
                 })
         }
 
@@ -96,11 +76,45 @@ jobtracker.controller('HomeController', ['$route', '$scope', '$http', '$location
                 .then(function(result){
                     //$route.reload() modal does not close, should use bootstrap angular ui
                     $('#newCustomerJobModal').modal('hide');
-                    $("#newCustomerJobModal").on('hidden.bs.modal', function () {
+                    $("#newCustomerJobModal").on('hidden.bs.modal', function(){
                         $route.reload();
                     });
                 })
 
         }
+
+        $scope.addJobTask = function(){
+            $scope.job_task.job_uuid = $scope.job.uuid
+
+            $http.post('/a_add_job_task', {job_task: $scope.job_task})
+                .then(function(result){
+                    $('#newJobTaskModal').modal('hide');
+                    $('#newJobTaskModal').on('hidden.bs.modal', function(){
+                        $route.reload();
+                    })
+
+                })
+        }
     }
 ])
+
+//back button
+//todo, hide when at Home "/"
+jobtracker.directive("angularBack", ['$window', function($window){
+    return {
+        template: "<button class='btn btn-primary'>Back</button>",
+        controller: 'HomeController',
+        controllerAs: 'vm',
+        bindToController:true,
+        link: function(scope, elem, attrs){
+            elem.bind('click', function(){
+                //todo, back button should not refresh page. instead load previous route
+                if (scope.vm.canGoBack){
+                    javascript:history.go(-1)
+                }
+
+            })
+        }
+    };
+}]);
+

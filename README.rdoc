@@ -2,6 +2,8 @@
 
 
 This application uses Rails for backend REST calls with Angular on the frontend.
+Bootstrap was used with a responsive design
+
 Utilising the Clearance gem for authentication and authorization.
 
 Continuous Integration done via Circle CI, which runs Rspec Tests then deploys to Heroku when tests pass.

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'a_customers_data' => 'angular_main#customers'
   get 'a_customer_data/:uuid/jobs' => 'angular_main#customer_jobs'
   get 'a_job/:uuid/tasks' => 'angular_job_tasks#job_tasks'
+  post 'a_add_job_task' => 'angular_job_tasks#add_job_task'
   post 'a_add_customer' => 'angular_main#add_customer'
   post 'add_customer_job' => 'angular_main#add_customer_job'
   #put 'a_customer/:uuid/update' => 'main#update_customer'

@@ -11,20 +11,14 @@ class AngularJobTasksController < ApplicationController
   end
 
   def add_job_task
-    Rails.logger.info "add_job_task::params(#{params.inspect})"
+    job = Job.where(uuid: params[:job_task][:job_uuid]).first
 
-    @job = Job.where(uuid: params[:job_task][:job_uuid]).first
-
-    Rails.logger.info "add_job_task::job(#{@job.inspect})"
-    if @job.present?
-      @job.job_tasks.create(job_task_params)
-      @tasks = @job.all_tasks
+    if job.present?
+      job.job_tasks.create(job_task_params)
+      tasks = job.all_tasks
     end
 
-    respond_to do |format|
-      format.html {render or redirect_to '/'}
-      format.js
-    end
+    api_response ({job: job, tasks: tasks}).to_json
   end
 
   def delete_job_task
