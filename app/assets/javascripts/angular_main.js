@@ -21,16 +21,17 @@ jobtracker.config(['$routeProvider',
 
 //back button
 //todo, hide when at Home "/"
-jobtracker.directive("angularBack", function($window){
+jobtracker.directive("angularBack", [function($window){
     return {
         template: "<button class='btn btn-primary'>Back</button>",
         link: function(scope, elem, attrs){
             elem.bind('click', function(){
-                $window.history.back();
+                //todo, back button should not refresh page. instead load previous route
+                javascript:history.go(-1)
             })
         }
     };
-});
+}]);
 
 //Controllers
 jobtracker.controller('HomeController', ['$route', '$scope', '$http', '$location', '$routeParams',

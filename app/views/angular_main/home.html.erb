@@ -1,5 +1,26 @@
 <div ng-class="" ng-app="jobtracker">
-  <div angular-back></div>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="hidden navbar-header">
+        <%= link_to 'JobTracker', '/customers', class: 'navbar-brand' %>
+      </div>
+      <br/>
+      <div class="pull-left">
+        <div angular-back></div>
+        <%= breadcrumbs.render %>
+      </div>
+      <div class="pull-right">
+        <% if signed_in? %>
+            <!-- Signed in as: <%= current_user.email %> -->
+            <%= button_to 'Sign out', sign_out_path, class: 'btn btn-primary', method: :delete %>
+        <% else %>
+            <%= link_to 'Sign in', sign_in_path, class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+
   <div class="view-container">
     <div ng-view class="view-frame animate-view">
 

@@ -3,6 +3,7 @@ class AngularMainController < ApplicationController
   #before_action :non_auth_current_user
 
   def home
+    render layout: 'angular_application'
   end
 
   def customers
