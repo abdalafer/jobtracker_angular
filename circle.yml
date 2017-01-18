@@ -1,5 +1,6 @@
 deployment:
   staging:
     branch: master
-    heroku:
-      appname: abdalafer-jobtracker-angular
+    commands:
+      - git push heroku master
+      - heroku run rake db:migrate  --app abdalafer-jobtracker-angular
