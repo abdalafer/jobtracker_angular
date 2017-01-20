@@ -60,6 +60,14 @@ jobtracker.controller('HomeController', ['$route', '$scope', '$http', '$location
                     $scope.started_tasks = result.data.tasks.started;
                     $scope.finished_tasks = result.data.tasks.finished;
                 })
+
+            //if reloaded, load with preselected tab. previously stored at a task method
+            var tab_selection = localStorage.getItem("task_tab_selection");
+
+            if (tab_selection != null){
+                $('.nav-tabs>li>a[data-target='+tab_selection+']').tab('show');
+                localStorage.setItem("task_tab_selection", null);
+            }
         }
 
         $scope.getJobTask = function(uuid){
@@ -105,6 +113,33 @@ jobtracker.controller('HomeController', ['$route', '$scope', '$http', '$location
                         $route.reload();
                     })
 
+                })
+        }
+
+        $scope.startJobTask = function(uuid){
+            $http.post('/a_task/'+uuid+'/start')
+                .then(function(){
+                    //todo eventually update just the current panel not the whole route
+                    $route.reload();
+                })
+        }
+
+        $scope.finishJobTask = function(uuid){
+            $http.post('/a_task/'+uuid+'/finish')
+                .then(function(){
+                    //todo eventually update just the current panel not the whole route
+                    $route.reload();
+
+                    localStorage.setItem("task_tab_selection", $('.nav-tabs .active > a').attr('data-target') );
+                })
+        }
+
+        $scope.deleteJobTask = function(uuid){
+            $http.delete('/a_task/'+uuid)
+                .then(function(){
+                    $route.reload();
+
+                    localStorage.setItem("task_tab_selection", $('.nav-tabs .active > a').attr('data-target') );
                 })
         }
     }

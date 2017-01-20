@@ -22,16 +22,9 @@ class AngularJobTasksController < ApplicationController
   end
 
   def delete_job_task
-    @job = Job.where(uuid: params[:job_uuid]).first
+    JobTask.where(uuid: params[:task_uuid]).destroy_all
 
-    job_task = JobTask.where(uuid: params[:task_uuid]).destroy_all
-
-    @tasks = @job.all_tasks
-
-    respond_to do |format|
-      format.html {render or redirect_to '/'}
-      format.js
-    end
+    api_response
   end
 
   def update_job_task
@@ -48,26 +41,14 @@ class AngularJobTasksController < ApplicationController
     task = JobTask.where(uuid: params[:task_uuid]).first
     task.update(state: 'started')
 
-    @job = Job.where(uuid: params[:job_uuid]).first
-    @tasks = @job.all_tasks
-
-    respond_to do |format|
-      format.html {render or redirect_to '/'}
-      format.js
-    end
+    api_response
   end
 
   def finish_job_task
     task = JobTask.where(uuid: params[:task_uuid]).first
-    task.update(state: 'finished')
+    task.update(state: 'finished') if task.present?
 
-    @job = Job.where(uuid: params[:job_uuid]).first
-    @tasks = @job.all_tasks
-
-    respond_to do |format|
-      format.html {render or redirect_to '/'}
-      format.js
-    end
+    api_response
   end
 
   def job_task_details

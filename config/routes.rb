@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
 
-
+  #angular specific routes
 
   get '/' => 'angular_main#home'
-
   get 'a_customers_data' => 'angular_main#customers'
   get 'a_customer_data/:uuid/jobs' => 'angular_main#customer_jobs'
   get 'a_job/:uuid/tasks' => 'angular_job_tasks#job_tasks'
@@ -11,8 +10,9 @@ Rails.application.routes.draw do
   post 'a_add_customer' => 'angular_main#add_customer'
   post 'add_customer_job' => 'angular_main#add_customer_job'
   get 'a_task/:uuid' => 'angular_job_tasks#job_task_details'
-
-  #put 'a_customer/:uuid/update' => 'main#update_customer'
+  post 'a_task/:task_uuid/start' => 'angular_job_tasks#start_job_task'
+  post 'a_task/:task_uuid/finish' => 'angular_job_tasks#finish_job_task'
+  delete 'a_task/:task_uuid' => 'angular_job_tasks#delete_job_task'
 
 
   get 'customers' => 'main#customers'
