@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AngularMainController, type: :controller do
-  describe "GET customers" do
+  describe "customers" do
     it "fails to authorize" do
       user = FactoryGirl.create(:user)
 
@@ -29,10 +29,20 @@ RSpec.describe AngularMainController, type: :controller do
       response_hash.first['full_name'].should eq('jimmy')
       response_hash.last['full_name'].should eq('larry')
     end
+
+    it "creates a customer" do
+      user = FactoryGirl.create(:user)
+      sign_in_as(user)
+
+      post :add_customer, customer: {full_name: 'Linda Smith', address: '123 sw 45 st'}
+
+      Customer.last.full_name.should eq('Linda Smith')
+      Customer.last.address.should eq('123 sw 45 st')
+    end
   end
 
-  describe "GET customer jobs" do
-    it "returns customer jobs" do
+  describe "customer jobs" do
+    it "returns jobs" do
       user = FactoryGirl.create(:user)
       sign_in_as(user)
 
@@ -42,18 +52,6 @@ RSpec.describe AngularMainController, type: :controller do
       get :customer_jobs, uuid: customer.uuid
 
       response_hash['jobs'].first['title'].should eq('Car Work')
-    end
-  end
-
-  describe "POST add_customer" do
-    it "creates a customer" do
-      user = FactoryGirl.create(:user)
-      sign_in_as(user)
-
-      post :add_customer, customer: {full_name: 'Linda Smith', address: '123 sw 45 st'}
-
-      Customer.last.full_name.should eq('Linda Smith')
-      Customer.last.address.should eq('123 sw 45 st')
     end
   end
 
