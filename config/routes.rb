@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   post 'a_add_job_task' => 'angular_job_tasks#add_job_task'
   post 'a_add_customer' => 'angular_main#add_customer'
   post 'add_customer_job' => 'angular_main#add_customer_job'
+  get 'a_task/:uuid' => 'angular_job_tasks#job_task_details'
+
   #put 'a_customer/:uuid/update' => 'main#update_customer'
 
 

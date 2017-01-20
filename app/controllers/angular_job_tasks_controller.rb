@@ -71,13 +71,10 @@ class AngularJobTasksController < ApplicationController
   end
 
   def job_task_details
-    @job_task = JobTask.where(uuid: params[:uuid]).first
-    @job = @job_task.job
+    job_task = JobTask.where(uuid: params[:uuid]).first
+    job = @job_task.try(:job)
 
-    respond_to do |format|
-      format.html {render or redirect_to '/'}
-      format.js
-    end
+    api_response ({job: job, task: job_task}).to_json
   end
 
   def job_task_params

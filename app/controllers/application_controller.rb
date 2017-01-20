@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def api_response(json_body = nil, status_code = 200)
+    #Might process any data before rendering, hence why not using render json directly from controller.
     return render json: json_body, status: status_code
   end
   private

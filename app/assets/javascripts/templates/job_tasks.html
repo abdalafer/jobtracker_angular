@@ -23,7 +23,11 @@
                     <div class="list-group-item">
                         <input class="btn btn-default" type="submit" value="X">
                         <input class="btn btn-success" type="submit" value="Start">
-                        <input class="btn btn-success task_button" type="submit" value="{{pending_task.title}}">
+
+                        <button type="button" class="btn btn-primary task_button" ng-click="getJobTask(pending_task.uuid)">
+                            {{pending_task.title}}
+                        </button>
+
                     </div>
                 </div>
 
@@ -36,7 +40,9 @@
                     <div class="list-group-item">
                         <input class="btn btn-default" type="submit" value="X">
                         <input class="btn btn-success" type="submit" value="Finish">
-                        <input class="btn btn-success task_button" type="submit" value="{{started_task.title}}">
+                        <button type="button" class="btn btn-primary task_button" ng-click="getJobTask(started_task.uuid)">
+                            {{started_task.title}}
+                        </button>
                     </div>
                 </div>
 
@@ -47,7 +53,9 @@
 
                 <div ng-repeat="finished_task in finished_tasks | orderBy:'- created_at'">
                     <div class="list-group-item">
-                        <input class="btn btn-success task_button" type="submit" value="{{finished_task.title}}">
+                        <button type="button" class="btn btn-primary task_button" ng-click="getJobTask(finished_task.uuid)">
+                            {{finished_task.title}}
+                        </button>
                     </div>
                 </div>
 
@@ -88,3 +96,6 @@
         </div>
     </div>
 </div>
+
+<!-- Task Modal -->
+<div task-detail-view></div>

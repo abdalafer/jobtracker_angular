@@ -62,6 +62,18 @@ jobtracker.controller('HomeController', ['$route', '$scope', '$http', '$location
                 })
         }
 
+        $scope.getJobTask = function(uuid){
+            $http.get('/a_task/'+ uuid)
+                .then(function (result){
+                    console.log('.then(function (result){ Called')
+
+                    $scope.job_task_detail = result.data;
+                    $scope.job_task_detail = result.data;
+
+                    $('#jobTaskDetailsModal').modal('show');
+                })
+        }
+
         $scope.addCustomer = function(){
             $http.post('/a_add_customer', {customer: $scope.customer})
                 .then(function (result){
@@ -98,6 +110,7 @@ jobtracker.controller('HomeController', ['$route', '$scope', '$http', '$location
     }
 ])
 
+//Directives
 //back button
 //todo, hide when at Home "/"
 jobtracker.directive("angularBack", ['$window', function($window){
@@ -117,4 +130,11 @@ jobtracker.directive("angularBack", ['$window', function($window){
         }
     };
 }]);
+
+jobtracker.directive("taskDetailView", [function($compile){
+    return {
+        templateUrl: '_task_details.html'
+    }
+
+}])
 
